@@ -1,0 +1,117 @@
+/* styles.css */
+
+/* Body styles */
+body {
+  font-family: Arial, sans-serif; /* Set the font family for the entire page to Arial with fallback to sans-serif */
+  margin: 0; /* Remove any default margin around the body element */
+  padding: 0; /* Remove any default padding around the body element */
+}
+
+/* Container styles */
+.container-app {
+  display: flex; /* Use flexbox to create a flexible container */
+  flex-direction: column; /* Arrange the child elements vertically in a column */
+  min-height: 100vh; /* Set the minimum height of the container to occupy the full viewport height */
+}
+
+/* Header styles */
+.header {
+  background-color: white; /* Set the background color of the header to white */
+  color: #fff; /* Set the text color of the header to white */
+  padding: 10px; /* Add 10 pixels of padding around the header content */
+}
+
+/* Centered content styles */
+.centered-content {
+  flex: 1; /* Allow the centered content to expand and take up the available space */
+  display: flex; /* Use flexbox to center the content */
+  justify-content: center; /* Center the child elements horizontally */
+  align-items: center; /* Center the child elements vertically */
+}
+
+/* Navbar styles */
+.navbar {
+  background-color: #f8f9fa; /* Set the background color of the navbar to a light gray (#f8f9fa) */
+}
+
+.navbar-brand {
+  font-weight: bold; /* Set the font weight of the navbar brand to bold */
+}
+
+.nav-item {
+  margin-right: 10px; /* Add 10 pixels of right margin to each navigation item (menu item) */
+}
+
+/* Logout link styles */
+#nav-logout {
+  margin-left: auto; /* Push the logout link to the right by setting auto margin to the left, effectively aligning it to the right */
+  cursor: pointer; /* Set the cursor to a pointer (usually a hand) when hovering over the logout link to indicate interactivity */
+}
+
+/* Status message styles */
+#createStatus {
+  color: green; /* Set the color of the status message to green */
+  font-weight: bold; /* Set the font weight of the status message to bold */
+}
+
+/* User name styles */
+#user-name {
+  margin-right: 10px; /* Add 10 pixels of right margin to the user name element (assuming it is used in the application) */
+}
+
+/* Custom styles for the AllData component */
+.allData-cards {
+  margin: 20px;
+}
+
+.card {
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+}
+
+.card-header {
+  background-color: #f8f9fa;
+  font-weight: bold;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.card-body {
+  padding: 10px;
+}
+
+/* Media query to adjust card layout for larger screens */
+@media (min-width: 768px) {
+  .row-cols-2 {
+    column-count: 2;
+  }
+
+  .col {
+    display: inline-block;
+    width: 50%;
+    box-sizing: border-box;
+    padding: 0 10px;
+  }
+}
+/* Custom styles for the cards */
+.custom-card {
+  /* Add your custom styles here to adjust the thickness of the cards */
+  /* For example, you can set a fixed height or add padding to increase thickness */
+  height: 200px;
+  padding: 20px;
+}
+
+/* Media query to adjust card layout for larger screens */
+@media (min-width: 768px) {
+  .row-cols-2 {
+    column-count: 2;
+  }
+
+  .col {
+    display: inline-block;
+    width: 50%;
+    box-sizing: border-box;
+    padding: 0 10px;
+  }
+}

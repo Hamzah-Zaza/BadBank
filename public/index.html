@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Meta tags -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- Title -->
+    <title>Bad Bank</title>
+
+    <!-- Custom CSS Styles -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <!-- Don't use this in production: Babel Standalone -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <!-- The root div where React will render the application -->
+    <div id="root"></div>
+
+    <!-- Load React and its dependencies -->
+    <script
+      src="https://unpkg.com/react/umd/react.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-dom/umd/react-dom.development.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-router@5.2.1/umd/react-router.min.js"
+      crossorigin
+    ></script>
+    <script
+      src="https://unpkg.com/react-router-dom@5.2.1/umd/react-router-dom.min.js"
+      crossorigin
+    ></script>
+
+    <!-- Load React components using Babel to transpile JSX -->
+    <script src="context.js" defer type="text/babel"></script>
+    <script src="navbar.js" defer type="text/babel"></script>
+    <script src="createaccount.js" defer type="text/babel"></script>
+    <script src="login.js" defer type="text/babel"></script>
+    <script src="deposit.js" defer type="text/babel"></script>
+    <script src="withdraw.js" defer type="text/babel"></script>
+    <script src="balance.js" defer type="text/babel"></script>
+    <script src="alldata.js" defer type="text/babel"></script>
+    <script src="home.js" defer type="text/babel"></script>
+    <script src="app.js" defer type="text/babel"></script>
+  </body>
+</html>
