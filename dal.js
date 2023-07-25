@@ -11,85 +11,148 @@ MongoClient.connect(url, {useUnifiedTopology: true}, function(err, client){
 });
 
 // create user account
-function create(name, email, password){
+// Create user account
+function create(name, email, password) {
     return new Promise((resolve, reject) => {
+        // Access the 'users' collection in the database
         const collection = db.collection('users');
-        const doc = {name, email, password, balance: 10};
-        collection.insertOne(doc, {w:1}, function(err, result) {
-            err? reject(err) : resolve(doc);
+
+        // Create a document representing the user account
+        const doc = {
+            name: name,           // User's name
+            email: email,         // User's email
+            password: password,   // User's password
+            balance: 0            // User's initial balance is set to 0
+        };
+
+        // Insert the document into the 'users' collection
+        collection.insertOne(doc, { w: 1 }, function (err, result) {
+            if (err) {
+                // If there's an error, reject the promise with the error
+                reject(err);
+            } else {
+                // If successful, resolve the promise with the newly created document
+                resolve(doc);
+            }
         });
-    }); 
+    });
 };
 
-// find user account
-function find(email){
-    return new Promise((resolve, reject) => {
-        const customers = db
-            .collection('users')
-            .find({email: email})
-            .toArray(function(err, docs) {
-                err? reject(err):resolve(docs);
-        })
-    })
-};
 
 // find user account
-function findOne(email) {
+// Find user account by email
+function find(email) {
     return new Promise((resolve, reject) => {
-        const customers = db
-            .collection('users')
-            .findOne({ email: email })
-            .then((doc) => resolve(doc))
-            .catch((err) => reject(err));
-    })
-};
+        // Access the 'users' collection in the database
+        const customers = db.collection('users');
+
+        // Search for documents where the 'email' field matches the provided email
+        customers.find({ email: email }).toArray(function (err, docs) {
+            if (err) {
+                // If there's an error, reject the promise with the error
+                reject(err);
+            } else {
+                // If successful, resolve the promise with the array of matching documents
+                resolve(docs);
+            }
+        });
+    });
+}
+
+
+// find user account
+// Find one user by email
+function findByEmail(email) {
+    return new Promise((resolve, reject) => {
+        // Access the 'users' collection in the database
+        const customers = db.collection('users');
+
+        // Search for a single document where the 'email' field matches the provided email
+        customers.findOne({ email: email })
+            .then((doc) => {
+                // If a document is found, resolve the promise with the document
+                resolve(doc);
+            })
+            .catch((err) => {
+                // If there's an error, reject the promise with the error
+                reject(err);
+            });
+    });
+}
+
 
 // update - deposit/withdraw amount
 function update(email, amount) {
-    // console.log('inside dal...amount:', amount)
     const amountNum = Number(amount);
+
     return new Promise((resolve, reject) => {
-        const customers = db
-            .collection('users')
-            .findOneAndUpdate(
-                { email: email },
-                { $inc: {balance: amountNum} },
-                { returnOriginal: false },
-                function (err, documents) {
-                    err ? reject(err) : resolve(documents);
+        // Access the 'users' collection in the database
+        const customers = db.collection('users');
+
+        // Find a single document where the 'email' field matches the provided email
+        // and update the 'balance' field by adding the amountNum to it
+        // The { returnOriginal: false } option ensures that the updated document is returned
+        customers.findOneAndUpdate(
+            { email: email },
+            { $inc: { balance: amountNum } },
+            { returnOriginal: false },
+            function (err, updatedDocument) {
+                if (err) {
+                    // If there's an error, reject the promise with the error
+                    reject(err);
+                } else {
+                    // If successful, resolve the promise with the updated document
+                    resolve(updatedDocument);
                 }
-            );
+            }
+        );
     });
 }
 
 // all users
-function all(){
+// Retrieve all user accounts
+function all() {
     return new Promise((resolve, reject) => {
-        const customers = db
-            .collection('users')
-            .find({})
-            .toArray(function(err, docs) {
-                err? reject(err):resolve(docs);
-        })
-    })
+        // Access the 'users' collection in the database
+        const customers = db.collection('users');
+
+        // Find all documents in the 'users' collection
+        customers.find({}).toArray(function (err, docs) {
+            if (err) {
+                // If there's an error, reject the promise with the error
+                reject(err);
+            } else {
+                // If successful, resolve the promise with the array of all documents
+                resolve(docs);
+            }
+        });
+    });
 }
+
 
 // update
 
+// Update 'message' field to "none" for all user documents
 function updateAll() {
     return new Promise((resolve, reject) => {
-        const customers = db.collection('users')
-        .updateAll(
+        // Access the 'users' collection in the database
+        const customers = db.collection('users');
+
+        // Update all documents in the 'users' collection
+        customers.updateMany(
             {},
-            {$set: {message: "none"}},
-            function(err, docs) {
-                err? reject(err):resolve(docs);
+            { $set: { message: "none" } },
+            function (err, result) {
+                if (err) {
+                    // If there's an error, reject the promise with the error
+                    reject(err);
+                } else {
+                    // If successful, resolve the promise with the result
+                    resolve(result);
+                }
             }
-        )
-    })
+        );
+    });
 }
 
-// Transfer
-
-
-module.exports = {create, find, findOne, update, all, updateAll};
+module.exports = {create, find, findByEmail, update, all, updateAll};
